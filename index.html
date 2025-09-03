@@ -1,28 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang web cá nhân</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trang của tôi · GitHub Pages</title>
+  <meta name="description" content="Portfolio/landing page tối giản, hiện đại, chạy trên GitHub Pages – một file HTML duy nhất." />
+  <meta property="og:title" content="Portfolio · GitHub Pages" />
+  <meta property="og:description" content="Giao diện đẹp, responsive, dark mode, hiệu ứng mượt." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== CSS biến màu chủ đạo ===== */
+    :root {
+      --bg: #0b1220;
+      --bg-soft: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --card: #11182799;
+      --primary: #38bdf8;
+      --primary-600: #0891b2;
+      --ring: 0 0 0 8px rgba(56,189,248,.15);
+      --shadow: 0 10px 30px rgba(2,6,23,.35);
+      --radius: 18px;
+      --maxw: 1100px;
+      --grid-gap: clamp(14px, 2vw, 22px);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg: #f8fafc; --bg-soft: #ffffff; --text: #0f172a; --muted:#475569; --card:#ffffffcc; --shadow:0 10px 30px rgba(2,6,23,.08);} }
+
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(56,189,248,.15), transparent 60%), var(--bg);
+      color:var(--text); line-height:1.6; letter-spacing:.2px;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+    /* ===== Header ===== */
+    header{
+      position: sticky; top:0; z-index:50; backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(2,6,23,.75), rgba(2,6,23,.35));
+      border-bottom: 1px solid rgba(148,163,184,.1);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
+    .logo{width:28px; height:28px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg, var(--primary), #7dd3fc); box-shadow:var(--shadow)}
+    .nav ul{display:flex; gap:18px; list-style:none; padding:0; margin:0}
+    .nav a{padding:8px 12px; border-radius:10px; color:var(--muted)}
+    .nav a:hover{color:var(--text); background:rgba(148,163,184,.12)}
+    .cta{background:var(--primary); color:#001018; padding:10px 14px; border-radius:12px; font-weight:700; box-shadow:var(--shadow)}
+    .cta:hover{filter:brightness(.95)}
+
+    /* ===== Hero ===== */
+    .hero{padding:72px 0 56px}
+    .hero .wrap{display:grid; grid-template-columns: 1.2fr .8fr; align-items:center; gap:40px}
+    .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); background:rgba(148,163,184,.12); padding:6px 10px; border-radius:999px; border:1px solid rgba(148,163,184,.18)}
+    h1{font-size:clamp(28px, 4vw, 44px); line-height:1.15; margin:12px 0 16px}
+    .lead{font-size:clamp(15px, 1.4vw, 18px); color:var(--muted); max-width:60ch}
+    .actions{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:12px; border:1px solid rgba(148,163,184,.18); background:rgba(148,163,184,.08)}
+    .btn:hover{background:rgba(148,163,184,.14)}
+
+    .hero-card{border-radius:var(--radius); background:linear-gradient(180deg, rgba(15,23,42,.7), rgba(15,23,42,.4)); padding:20px; box-shadow:var(--shadow); border:1px solid rgba(148,163,184,.15)}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--grid-gap); margin-top:10px}
+    .stat{background:var(--card); border:1px solid rgba(148,163,184,.15); padding:16px; border-radius:16px}
+    .stat .num{font-size:24px; font-weight:800}
+    .stat .lbl{font-size:12px; color:var(--muted)}
+
+    /* ===== Sections ===== */
+    section{padding:56px 0}
+    .section-title{font-size:clamp(22px, 3vw, 32px); margin:0 0 8px}
+    .section-desc{color:var(--muted); margin:0 0 22px}
+
+    /* Features grid */
+    .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--grid-gap)}
+    .card{background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px}
+    .kicker{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em}
+
+    /* Projects */
+    .projects{display:grid; grid-template-columns:repeat(3, 1fr); gap:var(--grid-gap)}
+    .project{overflow:hidden; position:relative}
+    .project img{border-radius:14px; aspect-ratio: 16/10; object-fit:cover; border:1px solid rgba(148,163,184,.18)}
+    .project .meta{position:absolute; inset:auto 10px 10px 10px; background:rgba(2,6,23,.6); border:1px solid rgba(148,163,184,.25); color:var(--text); padding:10px 12px; border-radius:12px; backdrop-filter: blur(8px)}
+
+    /* About */
+    .about{display:grid; grid-template-columns: .8fr 1.2fr; gap:40px}
+    .about .bubble{border:1px solid rgba(148,163,184,.18); background:linear-gradient(180deg, rgba(148,163,184,.08), rgba(148,163,184,.04)); padding:22px; border-radius:16px}
+
+    /* Contact */
+    form{display:grid; gap:12px}
+    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(148,163,184,.25); background:rgba(2,6,23,.35); color:var(--text)}
+    input:focus, textarea:focus{outline:none; box-shadow: var(--ring); border-color: var(--primary)}
+    button[type=submit]{background:var(--primary); color:#001018; padding:12px 16px; border:none; border-radius:12px; font-weight:700; box-shadow:var(--shadow); cursor:pointer}
+
+    /* Footer */
+    footer{padding:28px 0 60px; color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero .wrap{grid-template-columns:1fr}
+      .grid, .projects{grid-template-columns:1fr 1fr}
+      .about{grid-template-columns:1fr}
+    }
+    @media (max-width: 640px){
+      .nav ul{display:none}
+      .grid, .projects{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+    }
+
+    /* Tiny animations */
+    .reveal{opacity:0; transform:translateY(16px); animation: up .7s ease forwards}
+    @keyframes up{to{opacity:1; transform:none}}
+  </style>
 </head>
 <body>
+  <!-- ===== Header / Nav ===== -->
   <header>
-    <h1>Xin chào!</h1>
-    <p>Chào mừng bạn đến với website của tôi.</p>
+    <div class="container nav">
+      <a class="brand" href="#top">
+        <span class="logo">★</span>
+        <span>Nguyen Thanh Dat</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#features">Tính năng</a></li>
+          <li><a href="#projects">Dự án</a></li>
+          <li><a href="#about">Giới thiệu</a></li>
+          <li><a href="#contact" class="cta">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <nav>
-    <a href="#">Trang chủ</a>
-    <a href="#">Giới thiệu</a>
-    <a href="#">Liên hệ</a>
-  </nav>
-  <main>
-    <section>
-      <h2>Đây là phần nội dung chính</h2>
-      <p>Bạn có thể thay đổi nội dung này theo ý muốn.</p>
-    </section>
+
+  <!-- ===== Hero ===== -->
+  <main id="top" class="hero">
+    <div class="container wrap">
+      <div>
+        <span class="eyebrow">🚀 Modern · Responsive · Dark‑mode</span>
+        <h1>Thiết kế web cá nhân đẹp mắt cho <span style="color:var(--primary)">GitHub Pages</span></h1>
+        <p class="lead">Mẫu portfolio/landing page tối giản, dùng một file HTML + CSS, tối ưu SEO, hiển thị tốt trên mọi kích thước màn hình. Dễ chỉnh sửa để phù hợp với bạn.</p>
+        <div class="actions">
+          <a class="btn" href="#projects">Xem dự án mẫu →</a>
+          <a class="btn" href="https://github.com/new" target="_blank" rel="noreferrer">Tạo repo GitHub</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="num">1</div><div class="lbl">file duy nhất</div></div>
+          <div class="stat"><div class="num"><span title="No build">0</span></div><div class="lbl">build step</div></div>
+          <div class="stat"><div class="num">∞</div><div class="lbl">tuỳ biến</div></div>
+        </div>
+      </div>
+      <div class="hero-card reveal" style="animation-delay:.1s">
+        <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop" alt="Hero preview" />
+        <p style="color:var(--muted); margin:10px 2px 0">Ảnh minh hoạ từ Unsplash.</p>
+      </div>
+    </div>
   </main>
+
+  <!-- ===== Features ===== -->
+  <section id="features">
+    <div class="container">
+      <h2 class="section-title">Điểm nổi bật</h2>
+      <p class="section-desc">Làm trang cá nhân/đồ án nhanh – đẹp – gọn.</p>
+      <div class="grid">
+        <div class="card reveal" style="animation-delay:.05s">
+          <div class="kicker">Thiết kế</div>
+          <h3>Tối giản mà tinh tế</h3>
+          <p>Khoảng trắng hợp lý, lưới 3 cột, bo góc lớn, đổ bóng mềm, gradient nền nhẹ và typography Inter.</p>
+        </div>
+        <div class="card reveal" style="animation-delay:.1s">
+          <div class="kicker">Hiệu năng</div>
+          <h3>Không phụ thuộc framework</h3>
+          <p>Chạy tĩnh trên GitHub Pages, không cần build, chỉ dùng HTML + CSS thuần và chút JS.</p>
+        </div>
+        <div class="card reveal" style="animation-delay:.15s">
+          <div class="kicker">Tương thích</div>
+          <h3>Responsive & Dark mode</h3>
+          <p>Tự động theo theme của hệ thống, bố cục linh hoạt cho mobile, tablet, desktop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Dự án tiêu biểu</h2>
+      <p class="section-desc">Thay ảnh + tiêu đề + link của bạn vào là xong.</p>
+      <div class="projects">
+        <a class="project reveal" style="animation-delay:.05s" href="#" target="_blank" rel="noreferrer">
+          <img alt="Project 1" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop" />
+          <div class="meta">HOMIN_IZHI · Verilog</div>
+        </a>
+        <a class="project reveal" style="animation-delay:.1s" href="#" target="_blank" rel="noreferrer">
+          <img alt="Project 2" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop" />
+          <div class="meta">Class‑E RF Amplifier</div>
+        </a>
+        <a class="project reveal" style="animation-delay:.15s" href="#" target="_blank" rel="noreferrer">
+          <img alt="Project 3" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" />
+          <div class="meta">ESP8266 Attendance</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="container about">
+      <div class="bubble reveal" style="animation-delay:.05s">
+        <h2 class="section-title" style="margin:0 0 6px">Giới thiệu</h2>
+        <p class="section-desc" style="margin:0 0 14px">Một chút về bản thân, kinh nghiệm và đam mê của bạn.</p>
+        <p>Tôi là sinh viên kỹ thuật mê cả analog lẫn digital, thích tối ưu timing, pipeline và thiết kế mạch trên FPGA. Ngoài ra còn thích viết blog, chụp ảnh, và chia sẻ kiến thức.</p>
+      </div>
+      <div class="bubble reveal" style="animation-delay:.1s">
+        <h3>Thông tin nhanh</h3>
+        <ul style="margin:8px 0 0; padding-left:18px; color:var(--muted)">
+          <li>Địa điểm: Hà Nội, Việt Nam</li>
+          <li>Quan tâm: Verilog, Cadence, RF, IoT</li>
+          <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
+          <li>GitHub: <a href="https://github.com/yourhandle" target="_blank" rel="noreferrer">@yourhandle</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Liên hệ</h2>
+      <p class="section-desc">Gửi mail trực tiếp hoặc mở issue trên GitHub.</p>
+      <div class="grid">
+        <div class="card">
+          <form action="mailto:you@example.com" method="post" enctype="text/plain">
+            <input name="name" placeholder="Tên của bạn" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" rows="5" placeholder="Lời nhắn" required></textarea>
+            <button type="submit">Gửi</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Hướng dẫn nhanh</h3>
+          <ol style="margin:0; padding-left:18px; color:var(--muted)">
+            <li>Tạo repo <b>yourhandle.github.io</b> trên GitHub.</li>
+            <li>Tạo file <b>index.html</b>, dán toàn bộ mã của trang này.</li>
+            <li>Commit → Deploy tự động. Vào Settings → Pages kiểm tra.</li>
+          </ol>
+          <p style="margin-top:10px">Cần tuỳ biến domain? Thêm <code>CNAME</code> trong repo.</p>
+        </div>
+        <div class="card">
+          <h3>Mẹo tối ưu</h3>
+          <ul style="margin:0; padding-left:18px; color:var(--muted)">
+            <li>Đổi màu chủ đạo ở <code>:root --primary</code>.</li>
+            <li>Thay ảnh Unsplash bằng ảnh dự án thực tế.</li>
+            <li>Điền đúng <code>&lt;title&gt;</code> + <code>description</code> để SEO tốt.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
   <footer>
-    &copy; 2025 bởi datdatnguyen2609
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+      <div>© <span id="y"></span> · Làm với ❤ trên GitHub Pages</div>
+      <div style="display:flex; gap:14px">
+        <a href="#top">Lên đầu trang ↑</a>
+        <a href="https://github.com/yourhandle/yourhandle.github.io" target="_blank" rel="noreferrer">Mã nguồn</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Năm hiện tại + hiệu ứng reveal theo scroll
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const obs = new IntersectionObserver((entries)=>{
+      for (const e of entries){ if(e.isIntersecting){ e.target.classList.add('seen'); }}
+    }, {threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  </script>
 </body>
 </html>
